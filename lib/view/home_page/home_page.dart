@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_notesflutter/view/data_widget/data_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static int _currentIndex = 0;
 
-  static const List<Widget> items = [
+  static List<Widget> items = [
     Text('home'),
     Text('no home'),
     Text('absolytli not home'),

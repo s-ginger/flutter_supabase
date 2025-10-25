@@ -21,9 +21,11 @@ class SupabaseRepository implements IAuthRepository {
       if (response.user != null) {
         return true;
       } else {
+        print("Eroorr");
         return false;
       }
     } catch (e) {
+      print(e.toString());
       return false;
     }
   }
@@ -42,24 +44,22 @@ class SupabaseRepository implements IAuthRepository {
 
       if (response.user != null) {
         var userid = response.user?.id;
-        print('Пользователь зарегистрирован: ${response.user!.email}');
-        await _client.from('users').insert({'id': userid!, 'name': username});
 
+        await _client.from('users').insert({'id': userid!, 'name': username});
         return true;
       } else {
-        print('Регистрация прошла, но подтверждение email требуется.');
         return false;
       }
-    } on AuthException catch (error) {
-      print('Ошибка регистрации: ${error.message}');
+    } on AuthException catch (_) {
       return false;
     } catch (e) {
-      print('Неизвестная ошибка: $e');
       return false;
     }
   }
 
   @override
-  // TODO: implement token
-  bool get isLogin => false;
+  Future<void> logout() async {
+    await _client.auth.signOut();
+  }
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_notesflutter/view/view.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,7 +33,7 @@ class _LoginPage extends State<LoginPage> {
       if (val == true) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Регистрация успешна для ${authRepo.isLogin}'),
+            content: Text('Регистрация успешна для ${Supabase.instance.client.auth.currentUser?.email}'),
           ),
         );
 
